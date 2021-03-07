@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-colorselector.min.css' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
+    <title>NBK Olympia</title>
+    <style>
+        html {
+            min-height: 100%;
+            position: relative;
+        }
+        body {
+            background-color: #4da6ff
+;
+            /* min-width: 860px; */
+            margin-bottom: 30px;
+        }
+        .nav-item {
+            margin-left: 1em;
+        }
+        footer {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            bottom: 0;
+            font-style: italic;
+        }
+    </style>
+    {% block style %}
+    {% endblock %}
+</head>
+
+<body>
+    <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">Trang chủ</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!-- <li class="nav-item">
+                    <a class="nav-link btn btn-outline-danger" >Reset</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link btn btn-sm btn-outline-primary" href="{% url 'score' %}">Điểm số</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link btn btn-sm btn-outline-info dropdown-toggle" href="#" id="showRules" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Luật chơi</a>
+                    <div class="dropdown-menu" aria-labelledby="showRules">
+                        <a class="nav-link btn btn-sm btn-outline-secondary nhoNeoRule" style="margin:3px" href="#">Nhổ neo</a>
+                        <a class="nav-link btn btn-sm btn-outline-info vuotSongRule" style="margin:3px" href="#">Vượt sóng</a>
+                        <a class="nav-link btn btn-sm btn-outline-warning butPhaRule" style="margin:3px" href="#">Bứt phá</a>
+                        <a class="nav-link btn btn-sm btn-outline-success chinhPhucRule" style="margin:3px" href="#">Chinh phục</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-sm btn-outline-success" href="{% url 'khoidong' %}">Nhổ neo</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link btn btn-sm btn-outline-warning" href="{% url 'vuotsong' %}">
+                        Vượt sóng
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-sm btn-outline-danger" href="{% url 'tangtoc' %}">Bứt phá</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-sm btn-outline-info" href="{% url 'chinhphuc' %}">Chinh phục</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link btn btn-sm btn-outline-success dropdown-toggle" href="#" id="phanLuotBtn" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Phân lượt</a>
+                    <div class="dropdown-menu" aria-labelledby="phanLuotBtn">
+                        <a class="nav-link btn btn-sm btn-outline-primary" style="margin:3px" href="{% url 'phanLuotButPha' %}">Phân lượt bứt phá</a>
+                        <a class="nav-link btn btn-sm btn-outline-warning" style="margin:3px" href="{% url 'phanLuotChinhPhuc' %}">Phân lượt chinh phục</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-warning" href="{% url 'answer' %}">Trả lời câu hỏi</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="createNewQuestion" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Thêm câu hỏi
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="createNewQuestion">
+                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newKhoiDongQuestion'%}">Nhổ neo</a>
+                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newVuotSongQuestion' %}">Vượt sóng</a>
+                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newTangTocQuestion'%}">Bứt phá</a>
+                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newChinhPhucQuestion'%}">Chinh phục</a>
+                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newPhanLuotQuestion'%}">Phân lượt</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-primary" href="{% url 'logout' %}">Logout, {{user}}</a>
+                </li>
+            </ul>
+    </nav>
+    <div class="container">
+        <div class="row" id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <div id="nhoNeoRuleDialog" title="NHỔ NEO" class="ruleDialog">
+        <p id="nhoNeoRuleContent" style="font-size: 24px; text-align: justify;">
+            Tất cả các thí sinh trả lời 12 câu hỏi hình ảnh, audio hoặc video, mỗi câu hỏi trong vòng 15s. Thí sinh trả lời đúng và nhanh nhất được 15 điểm, những thí sinh khác trả lời đúng được 10 điểm.
+            <br>
+        </p>
+        <center>
+            <button class="btn btn-success closeDialogBtn">Đóng</button>
+        </center>
+    </div>
+
+    <div id="vuotSongRuleDialog" title="VƯỢT SÓNG" class="ruleDialog">
+        <p id="vuotSongRuleContent" style="font-size: 24px; text-align: justify;">
+            - Các thí sinh sẽ phải tìm ra một CNV nhưng <b>không cho biết số lượng chữ cái</b> của CNV, 6 hàng ngang gợi ý liên quan đến CNV được sắp xếp ngang dọc tùy ý và có thể giao nhau ở các kí tự chung. Mở mỗi hàng ngang có các ô <b>được tô màu xanh gợi ý các chữ cái có trong CNV</b>. Các thí sinh ấn chuông giành quyền trả lời CNV bất cứ lúc nào nhưng sai sẽ bị loại khỏi phần thi. 
+            <br><br>
+            - Thí sinh trả lời đúng và nhanh nhất được 15 điểm, các thí sinh khác trả lời đúng được 10 điểm. 
+            <br><br>
+            - Trả lời đúng CNV sau khi mở n hàng ngang được <b>(7-n)*15 điểm</b>.
+            <br><br>
+            - Sau khi mở tất cả các hàng ngang mà vẫn chưa có thí sinh nào trả lời đúng CNV. Cơ hội sẽ dành cho khán giả.
+        </p>
+        <center>
+            <button class="btn btn-success closeDialogBtn">Đóng</button>
+        </center>
+    </div>
+
+    <div id="butPhaRuleDialog" title="BỨT PHÁ" class="ruleDialog">
+        <p id="butPhaRuleContent" style="font-size: 24px; text-align: justify;">
+            - Các thí sinh giành lượt đi trước bằng <b>câu hỏi phân lượt</b>, thí sinh nào trả lời đúng và nhanh hơn sẽ giành được quyền ưu tiên trong phần thi này.
+            <br><br>
+            - Các thí sinh sẽ thi đấu 2 lượt. Sẽ có những gói câu hỏi thuộc nhiều lĩnh vực và tới lượt mỗi thí sinh, chọn 1 lĩnh vực trong số những lĩnh vực chưa được chọn trước đó và trả lời trong vòng 60s. Tối đa 15 câu trong mỗi gói, trả lời đúng mỗi câu được 10 điểm.
+            <br><br>
+        </p>
+        <center>
+            <button class="btn btn-success closeDialogBtn">Đóng</button>
+        </center>
+    </div>
+
+    <div id="chinhPhucRuleDialog" title="CHINH PHỤC" class="ruleDialog">
+        <p id="chinhPhucRuleContent" style="font-size: 24px; text-align: justify;">
+            - Các thí sinh tiếp tục giành quyền chọn thứ tự của mình bằng <b>câu hỏi phân lượt</b>. Ai trả lời đúng và nhanh hơn theo thứ tự sẽ <b>được chọn thứ tự của mình</b>.
+            <br><br>
+            - Sẽ có một bảng số gồm 6*6 ô vuông gồm các ô vuông trống, ô vuông chấm than và ô vuông chấm hỏi với các mức điểm tương ứng lần lượt là 10, 20, 30. 
+            <br><br>
+            - Mỗi thí sinh tới lượt mình chọn một ô và trả lời câu hỏi, đúng được tô màu của mình vào ô đó, sai các thí sinh khác ấn chuông giành quyền trả lời sau hiệu lệnh của MC. Trả lời đúng được tô màu của mình vào ô đó và lấy đi số điểm của câu hỏi từ người chọn. Sai sẽ bị trừ một nửa số điểm của câu hỏi. 
+            <br><br>
+            - Mỗi thí sinh có quyền đặt <b>ngôi sao hy vọng</b> vào bất kỳ lúc nào (chỉ được đặt một lần). Trả lời đúng câu hỏi có NSHV được thêm số điểm câu hỏi và được chọn thêm một ô nữa để trả lời, trả lời sai bị trừ số điểm bằng số điểm của câu hỏi.
+            <br><br> 
+            - Mỗi thí có 4 lượt chơi và nếu có một thí sinh tạo được một đường ngang dọc hoặc chéo với 4 ô màu của mình liên tiếp thì sẽ được cộng thêm 50 điểm. Mỗi thí sinh chỉ được + 50 điểm một lần.
+            <br><br>
+        </p>
+        <center>
+            <button class="btn btn-success closeDialogBtn">Đóng</button>
+        </center>
+    </div>
+
+</body>
+
+<footer class="page-footer">
+    <div class="container">
+        {% if footerDisplay %}
+        <b>
+        <span>Olympia</span>
+        </b>
+        {% endif %}
+        <button class="btn btn-success" id="toggleNavbar">Ẩn/hiện menu</button>
+        <button class="btn btn-info" id="playOST">Nhạc nền</button>
+    </div>
+</footer>
+
+<script src="{% static 'jquery.js' %}"></script>
+<script src="{% static 'jquery-ui.min.js' %}"></script>
+<script src="{% static 'popper.min.js' %}"></script>
+<script src="{% static 'bootstrap.min.js' %}"></script>
+<script src="{% static 'bootstrap-colorselector.min.js' %}"></script>
+<script>
+    $("#playOST").click(function(){
+        var ost = new Audio(ost_path);
+        ost.play();
+        $(this).hide();
+    });
+
+    $("#toggleNavbar").click(function(){
+        $("#mainNavbar").toggle();
+    });
+
+    $(".closeDialogBtn").click(function(){
+        $(".ruleDialog").dialog("close");
+    });
+
+    nhoNeoRuleDialog = $("#nhoNeoRuleDialog");
+
+    nhoNeoRuleDialog.dialog({
+        modal: true,
+        autoOpen: false,
+        minWidth: 600,
+    });
+
+    $(".nhoNeoRule").click(function(){
+        if(nhoNeoRuleDialog.dialog("isOpen")){
+            // already open
+        }
+        else{
+            // the dialog has not been opened yet
+            nhoNeoRuleDialog.dialog("open");
+        }
+    });
+
+    vuotSongRuleDialog = $("#vuotSongRuleDialog");
+
+    vuotSongRuleDialog.dialog({
+        modal: true,
+        autoOpen: false,
+        minWidth: 800,
+    });
+
+    $(".vuotSongRule").click(function(){
+        if(vuotSongRuleDialog.dialog("isOpen")){
+            // already open
+        }
+        else{
+            // the dialog has not been opened yet
+            vuotSongRuleDialog.dialog("open");
+        }
+    });
+
+
+    butPhaRuleDialog = $("#butPhaRuleDialog");
+
+    butPhaRuleDialog.dialog({
+        modal: true,
+        autoOpen: false,
+        minWidth: 750,
+    });
+
+    $(".butPhaRule").click(function(){
+        if(butPhaRuleDialog.dialog("isOpen")){
+            // already open
+        }
+        else{
+            // the dialog has not been opened yet
+            butPhaRuleDialog.dialog("open");
+        }
+    });
+
+
+    chinhPhucRuleDialog = $("#chinhPhucRuleDialog");
+
+    chinhPhucRuleDialog.dialog({
+        modal: true,
+        autoOpen: false,
+        minWidth: 900,
+    });
+
+    $(".chinhPhucRule").click(function(){
+        if(chinhPhucRuleDialog.dialog("isOpen")){
+            // already open
+        }
+        else{
+            // the dialog has not been opened yet
+            chinhPhucRuleDialog.dialog("open");
+        }
+    });
+
+</script>
+{% block scripts %}
+{% endblock %}
+</html>
