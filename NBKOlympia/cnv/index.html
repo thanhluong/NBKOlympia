@@ -1,0 +1,110 @@
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+
+<!-- <link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+
+<body>
+	<main>
+		<div id="canvas"></div>
+		<div id="previews"></div>
+	</main>
+</body> -->
+
+<style>
+#chuongngaivat {
+	width: 800px;
+	height: 800px;
+	background-color: gray;
+}
+
+#chuongngaivat .innerSquare {
+	width: 200px;
+	height: 200px;
+	float: left;
+}
+</style>
+
+<body>
+	
+	<main>
+		<center>
+			<div id="chuongngaivat">
+				<div id="1" class="innerSquare" style="background-position: 800px 800px;"></div>
+				<div id="2" class="innerSquare" style="background-position: 600px 800px;"></div>
+				<div id="3" class="innerSquare" style="background-position: 400px 800px;"></div>
+				<div id="4" class="innerSquare" style="background-position: 200px 800px;"></div>
+				<div id="5" class="innerSquare" style="background-position: 800px 600px;"></div>
+				<div id="6" class="innerSquare" style="background-position: 600px 600px;"></div>
+				<div id="7" class="innerSquare" style="background-position: 400px 600px;"></div>
+				<div id="8" class="innerSquare" style="background-position: 200px 600px;"></div>
+				<div id="9" class="innerSquare" style="background-position: 800px 400px;"></div>
+				<div id="10" class="innerSquare" style="background-position: 600px 400px;"></div>
+				<div id="11" class="innerSquare" style="background-position: 400px 400px;"></div>
+				<div id="12" class="innerSquare" style="background-position: 200px 400px;"></div>
+				<div id="13" class="innerSquare" style="background-position: 800px 200px;"></div>
+				<div id="14" class="innerSquare" style="background-position: 600px 200px;"></div>
+				<div id="15" class="innerSquare" style="background-position: 400px 200px;"></div>
+				<div id="16" class="innerSquare" style="background-position: 200px 200px;"></div>
+			</div>
+		</center>
+
+		<label for="showCorner">Mở hình số:</label>
+		<select id="showCorner">
+			<option value="1">Góc 1</option>
+			<option value="2">Góc 2</option>
+			<option value="3">Góc 3</option>
+			<option value="4">Góc 4</option>
+			<option value="5">Trung tâm</option>
+		</select>
+		<button id="showCornerBtn">Mở</button>
+
+	</main>
+
+	<script>
+
+	$("#showCornerBtn").click(function() {
+		var choice = $("#showCorner").val();
+		var imgurl = 'url(testimg.png)'
+		switch (choice) {
+			case '1':
+				$("#1").css('background-image', imgurl);
+				$("#2").css('background-image', imgurl);
+				$("#5").css('background-image', imgurl);
+				break;
+			case '2':
+				$("#3").css('background-image', imgurl);
+				$("#4").css('background-image', imgurl);
+				$("#8").css('background-image', imgurl);
+				break;
+			case '3':
+				$("#9").css('background-image', imgurl);
+				$("#13").css('background-image', imgurl);
+				$("#14").css('background-image', imgurl);
+				break;
+			case '4':
+				$("#12").css('background-image', imgurl);
+				$("#15").css('background-image', imgurl);
+				$("#16").css('background-image', imgurl);
+				break;
+			case '5':
+				$("#6").css('background-image', imgurl);
+				$("#7").css('background-image', imgurl);
+				$("#10").css('background-image', imgurl);
+				$("#11").css('background-image', imgurl);
+				break;
+		};
+	});
+
+	(function() {
+		// var i;
+		// for (i = 1; i <= 16; i++) {
+		// 	$("#" + i).css('background-image', imgurl);
+		// }
+	})();
+
+	</script>
+
+</body>
