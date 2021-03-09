@@ -47,7 +47,7 @@
     <div class="col-9" id="question">
         <div class="row">
             <div class="col-12">
-                <p class="questionNumber"><span id="questionNumber">0</span><span>/12</span></p>
+                <p class="questionNumber"><span id="questionNumber">0</span><span>/4</span></p>
                 <button class="btn btn-outline-info" id="showAnswer">Hiện đáp án</button>
                 <button class="btn btn-outline-primary" id="nextQuestion">Câu hỏi tiếp theo</button>
             </div>
@@ -67,7 +67,7 @@
     <div class="col-3" id="manageAnswer">
         <div class="row">
             <div class="col-12">
-                <button type="button" id="countDown" class="btn btn-danger" style="width:150px; height:150px; font-size: 70px">15</button>
+                <button type="button" id="countDown" class="btn btn-danger" style="width:150px; height:150px; font-size: 70px">30</button>
             </div>
         <!-- </div> -->
         <!-- <div class="row"> -->
@@ -151,7 +151,7 @@
         var demgio = new Audio("{% static 'khoidong/ChinhPhuc_15s.mp3' %}");
         demgio.play();
 
-        // Countdown 10s
+        // Countdown 30s
         var countDownInterval = null;
         countDownInterval =  setInterval(function () {
             var newTime = parseInt(countDownBox.text()) - 1;
@@ -180,7 +180,7 @@
                 })
 
                 clearInterval(countDownInterval);
-                countDownBox.text("15");
+                countDownBox.text("30");
                 // Enable the box again for next question
                 countDownBox.removeAttr("disabled");
             }
@@ -214,7 +214,11 @@
                 if (questionFileType == "image") {
                     fileDisplay.append("<img width='576' height='432' src=" + questionFile + ">");
                 } else if (questionFileType == "video") {
-                    fileDisplay.append("<video width='576' height='432' controls><source src=" + questionFile + " type='video/mp4'></video>");
+                    fileDisplay.append("<video id='videoObject' width='576' height='432' controls><source src=" + questionFile + " type='video/mp4'></video>");
+                    $("#videoObject").click(function() {
+                        $("#countDown").trigger("click");
+                    });
+
                 } else if (questionFileType == "sound") {
                     let htmlString = "<audio controls><source src="+ questionFile + " type='audio/mpeg'>Your browser does not support the audio element.</audio>"
                     fileDisplay.append(htmlString);

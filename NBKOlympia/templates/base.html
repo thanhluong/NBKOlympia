@@ -58,7 +58,7 @@
                         aria-haspopup="true" aria-expanded="false">Luật chơi</a>
                     <div class="dropdown-menu" aria-labelledby="showRules">
                         <a class="nav-link btn btn-sm btn-outline-secondary nhoNeoRule" style="margin:3px" href="#">Nhổ neo</a>
-                        <a class="nav-link btn btn-sm btn-outline-info vuotSongRule" style="margin:3px" href="#">Vượt sóng</a>
+                        <a class="nav-link btn btn-sm btn-outline-info vuotSongRule" style="margin:3px" href="#">Vượt chướng ngại vật</a>
                         <a class="nav-link btn btn-sm btn-outline-warning butPhaRule" style="margin:3px" href="#">Bứt phá</a>
                         <a class="nav-link btn btn-sm btn-outline-success chinhPhucRule" style="margin:3px" href="#">Chinh phục</a>
                     </div>
@@ -84,18 +84,18 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link btn btn-sm btn-outline-warning" href="{% url 'vuotsong' %}">
-                        Vượt sóng
+                        Vượt chướng ngại vật
                     </a>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link btn btn-sm btn-outline-danger" href="{% url 'tangtoc' %}">Bứt phá</a>
+                    <a class="nav-link btn btn-sm btn-outline-danger" href="{% url 'khoidong' %}">Tăng tốc</a>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link btn btn-sm btn-outline-info" href="{% url 'chinhphuc' %}">Chinh phục</a>
+                    <a class="nav-link btn btn-sm btn-outline-info" href="{% url 'chinhphuc' %}">Về đích</a>
                 </li>
 
 
@@ -131,14 +131,14 @@
 <!--                         <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newKhoiDongQuestion'%}">Nhổ neo</a>
  -->                        
 
-<!--                         <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newVuotSongQuestion' %}">Vượt sóng</a>
- -->                        
+                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newVuotSongQuestion' %}">Vượt chướng ngại vật</a>
+                        
 
-<!--                         <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newTangTocQuestion'%}">Bứt phá</a>
- -->                        
+                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newKhoiDongQuestion'%}">Tăng tốc</a>
+                        
 
-<!--                         <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newChinhPhucQuestion'%}">Chinh phục</a>
- -->                        
+                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newChinhPhucQuestion'%}">Về đích</a>
+                        
 
 <!--                         <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newPhanLuotQuestion'%}">Phân lượt</a>
  -->                    </div>

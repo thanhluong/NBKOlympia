@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'quanli',
     'khoidong',
     'vuotsong',
-    'tangtoc',
+    # 'tangtoc',
     'chinhphuc',
     'phanluot',
     'olpkhoidong1'

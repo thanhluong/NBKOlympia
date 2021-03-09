@@ -9,7 +9,7 @@ from .models import DiemThiSinh
 from khoidong.models import KhoiDongQuestion, KhoiDongAnswer
 from vuotsong.models import VuotSongQuestion, VuotSongAnswer
 from phanluot.models import PhanLuotQuestion, PhanLuotAnswer
-from tangtoc.models import TangTocQuestion
+# from tangtoc.models import TangTocQuestion
 from chinhphuc.models import ChinhPhucQuestion, ChinhPhucAnswer
 from userprofile.models import MyUser
 
