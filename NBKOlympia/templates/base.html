@@ -48,9 +48,11 @@
                 <!-- <li class="nav-item">
                     <a class="nav-link btn btn-outline-danger" >Reset</a>
                 </li> -->
+                
                 <li class="nav-item">
                     <a class="nav-link btn btn-sm btn-outline-primary" href="{% url 'score' %}">Điểm số</a>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link btn btn-sm btn-outline-info dropdown-toggle" href="#" id="showRules" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">Luật chơi</a>
@@ -61,20 +63,42 @@
                         <a class="nav-link btn btn-sm btn-outline-success chinhPhucRule" style="margin:3px" href="#">Chinh phục</a>
                     </div>
                 </li>
-                <li class="nav-item">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link btn btn-sm btn-outline-info dropdown-toggle" href="#" id="showKhoiDong" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Vòng khởi động</a>
+
+                    <div class="dropdown-menu" aria-labelledby="showKhoiDong">
+                        <a class="nav-link btn btn-sm btn-outline-success" style="margin:3px" href="{% url 'khoidong1' %}">Gói số 1</a>
+                        <a class="nav-link btn btn-sm btn-outline-success" style="margin:3px" href="{% url 'khoidong1' %}">Gói số 2</a>
+                        <a class="nav-link btn btn-sm btn-outline-success" style="margin:3px" href="{% url 'khoidong1' %}">Gói số 3</a>
+                        <a class="nav-link btn btn-sm btn-outline-success" style="margin:3px" href="{% url 'khoidong1' %}">Gói số 4</a>
+                    </div>
+                </li>
+
+
+<!--                 <li class="nav-item">
                     <a class="nav-link btn btn-sm btn-outline-success" href="{% url 'khoidong' %}">Nhổ neo</a>
                 </li>
+ -->
+
                 <li class="nav-item dropdown">
                     <a class="nav-link btn btn-sm btn-outline-warning" href="{% url 'vuotsong' %}">
                         Vượt sóng
                     </a>
                 </li>
+
+
                 <li class="nav-item">
                     <a class="nav-link btn btn-sm btn-outline-danger" href="{% url 'tangtoc' %}">Bứt phá</a>
                 </li>
+
+
                 <li class="nav-item">
                     <a class="nav-link btn btn-sm btn-outline-info" href="{% url 'chinhphuc' %}">Chinh phục</a>
                 </li>
+
+
                 <li class="nav-item dropdown">
                     <a class="nav-link btn btn-sm btn-outline-success dropdown-toggle" href="#" id="phanLuotBtn" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">Phân lượt</a>
@@ -84,22 +108,40 @@
                     </div>
                 </li>
             </ul>
+
+
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link btn btn-outline-warning" href="{% url 'answer' %}">Trả lời câu hỏi</a>
                 </li>
+
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="createNewQuestion" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         Thêm câu hỏi
                     </a>
                     <div class="dropdown-menu" aria-labelledby="createNewQuestion">
-                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newKhoiDongQuestion'%}">Nhổ neo</a>
-                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newVuotSongQuestion' %}">Vượt sóng</a>
-                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newTangTocQuestion'%}">Bứt phá</a>
-                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newChinhPhucQuestion'%}">Chinh phục</a>
-                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newPhanLuotQuestion'%}">Phân lượt</a>
-                    </div>
+                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newKhoiDong1Question'%}">Khởi động - Gói số 1</a>
+                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newKhoiDong1Question'%}">Khởi động - Gói số 2</a>
+                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newKhoiDong1Question'%}">Khởi động - Gói số 3</a>
+                        <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newKhoiDong1Question'%}">Khởi động - Gói số 4</a>
+
+
+<!--                         <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newKhoiDongQuestion'%}">Nhổ neo</a>
+ -->                        
+
+<!--                         <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newVuotSongQuestion' %}">Vượt sóng</a>
+ -->                        
+
+<!--                         <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newTangTocQuestion'%}">Bứt phá</a>
+ -->                        
+
+<!--                         <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newChinhPhucQuestion'%}">Chinh phục</a>
+ -->                        
+
+<!--                         <a class="nav-link btn btn-sm btn-outline-secondary" style="margin:3px" href="{% url 'newPhanLuotQuestion'%}">Phân lượt</a>
+ -->                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link btn btn-outline-primary" href="{% url 'logout' %}">Logout, {{user}}</a>
