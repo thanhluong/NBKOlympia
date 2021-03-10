@@ -37,8 +37,6 @@ urlpatterns = [
     path("chinhphuc/", include("chinhphuc.urls")),
     # Handle the PhanLuot app request
     path("phanluot/", include("phanluot.urls")),
-    # Handle the KhoiDong1 app request
-    path("olpkhoidong1/", include("olpkhoidong1.urls")),
     # Using simple class-view to display the homepage (no need for creating an app)
     path("", login_required(TemplateView.as_view(template_name="home.html")), name="home"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

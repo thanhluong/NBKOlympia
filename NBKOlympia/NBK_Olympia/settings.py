@@ -44,8 +44,7 @@ INSTALLED_APPS = [
     'vuotsong',
     'tangtoc',
     'chinhphuc',
-    'phanluot',
-    'olpkhoidong1'
+    'phanluot'
 ]
 
 MIDDLEWARE = [
