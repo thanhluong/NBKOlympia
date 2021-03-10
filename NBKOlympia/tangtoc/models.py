@@ -3,6 +3,8 @@ from userprofile.models import MyUser
 
 # Create your models here.
 
+def questionDirectoryPath(instance, filename):
+    return "tangtoc/{}/{}".format(instance.questionField.code, filename)
 
 class TangTocQuestionField(models.Model):
     """
@@ -36,6 +38,16 @@ class TangTocQuestion(models.Model):
     # The field of this question
     questionField = models.ForeignKey(TangTocQuestionField, on_delete=models.CASCADE,
                                       verbose_name="Lĩnh vực")
+
+    # Question file (for video/sound/image questions)
+    file = models.FileField(verbose_name="File đính kèm",
+                            upload_to=questionDirectoryPath,
+                            blank=True)
+
+    fileType = models.CharField(max_length=10,
+                                verbose_name="Loại file",
+                                choices = [("sound", "Âm thanh"), ("video", "Video"), ("image", "Hình ảnh")],
+                                blank=True)
 
     # The answer for this question
     answer = models.CharField(

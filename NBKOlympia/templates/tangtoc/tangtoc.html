@@ -140,8 +140,9 @@
             } else if (questionFileType == "video") {
                 fileDisplay.append("<video width='576' height='432' controls><source src=" + questionFile + " type='video/mp4'></video>");
             } else if (questionFileType == "sound") {
-                let htmlString = "<audio controls><source src="+ questionFile + " type='audio/mpeg'>Your browser does not support the audio element.</audio>"
+                let htmlString = "<audio controls id='questionAudio'><source src="+ questionFile + " type='audio/mpeg'>Your browser does not support the audio element.</audio>"
                 fileDisplay.append(htmlString);
+                document.getElementById("questionAudio").play();
             }
         }
     
