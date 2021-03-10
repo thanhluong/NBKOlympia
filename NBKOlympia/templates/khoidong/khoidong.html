@@ -215,9 +215,6 @@
                     fileDisplay.append("<img width='576' height='432' src=" + questionFile + ">");
                 } else if (questionFileType == "video") {
                     fileDisplay.append("<video id='videoObject' width='576' height='432' controls><source src=" + questionFile + " type='video/mp4'></video>");
-                    $("#videoObject").click(function() {
-                        $("#countDown").trigger("click");
-                    });
 
                 } else if (questionFileType == "sound") {
                     let htmlString = "<audio controls><source src="+ questionFile + " type='audio/mpeg'>Your browser does not support the audio element.</audio>"
