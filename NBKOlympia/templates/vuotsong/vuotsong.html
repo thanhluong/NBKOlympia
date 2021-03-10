@@ -222,6 +222,7 @@ body{
         <button class="btn btn-info btn-md crossword_btn" id="showQuestion">Câu hỏi</button>
         <button class="btn btn-success btn-md crossword_btn" id="showAnswer">Đúng</button>
         <button class="btn btn-danger btn-md crossword_btn" id="wrongAnswer">Sai</button>
+        <button class="btn btn-success btn-md crossword_btn" id="showCHTTAnswers">Đúng CHTT</button>
         <button class="btn btn-warning btn-md crossword_btn" id="showAllAnswers">Đúng CNV</button>
         </div>
       </div>
@@ -366,6 +367,7 @@ var currentQuestionID = 10;
 var questionContent = ""
 var challengeAnswer;
 var chuongNgaiVatContent;
+var cauhoiphuContent;
 
 //---------------------------------//
 //   GLOBAL VARIABLES              //
@@ -453,6 +455,8 @@ function GetWordsFromInput(){
   }
   challengeAnswer = wordArr[wordArr.length - 1];
   chuongNgaiVatContent = challengeAnswer;
+  wordArr.pop();
+  cauhoiphuContent = wordArr[wordArr.length - 1];
   wordArr.pop();
   // wordArr = ["DANANG", "TAMKY", "GIALAI", "LONGAN"];  
   // for(var i=0,val,w=document.getElementsByClassName("word");i<w.length;i++){
@@ -922,6 +926,12 @@ $("#showAllAnswers").click(function(event){
   $(".letter").css("background-color", "rgb(255,255,255)");
   $(".letter span").show();
   $("#chuongNgaiVat").html("<i>Chướng ngại vật: <b>" + chuongNgaiVatContent + "</b></i>");
+});
+
+$("#showCHTTAnswers").click(function(event) {
+    var congratAudio = new Audio("{% static 'vuotsong/VCNV_cau_dung.mp3' %}");
+    congratAudio.play();
+    $("#chuongNgaiVat").html("<i>Đáp án câu hỏi trung tâm: <b>" + cauhoiphuContent + "</b></i>");
 });
 
 $("#wrongAnswer").click(function(event){
