@@ -104,13 +104,15 @@
                     <button class="btn btn-info btn-sm crossword_btn" id="showQuestion">Câu hỏi</button>
                     <button class="btn btn-success btn-sm crossword_btn" id="showAnswer">Đúng</button>
 
-                    <select id="colorselector">
+<!--                     <select id="colorselector">
                         <option value="1" data-color="#ff0000">Red</option>
                         <option value="2" data-color="#ffa500" selected="selected">Orange</option>
                         <option value="3" data-color="#0000ff">Blue</option>
                         <option value="4" data-color="#008000">Green</option>
                         <option value="5" data-color="#ffffff">White</option>
                     </select>
+ -->
+                    <button class="btn btn-danger btn-sm" id="chooseNSHV">Ngôi sao hy vọng</button>
                 </div>
               </div>
             </div>
@@ -120,6 +122,11 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <p class="questionNumber"><span id="questionNumber">Vòng chinh phục!</span><span></span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="questionNumber" id="NSHVText"></p>
                         </div>
                     </div>
                     <div class="row">
@@ -235,7 +242,7 @@
     // Store all questions in an array
     let questions = {{ questions|safe }};
 
-    console.log(questions);
+    // console.log(questions);
 
     var currentQuestionID = 1;
     var questionAnswer = "";
@@ -427,7 +434,8 @@
     });
 
     function resetQuestionContent(newRow, newCol){
-        $("#questionNumber").text("Hàng số "+ newRow + ", cột số " + newCol);
+        // $("#questionNumber").text("Hàng số "+ newRow + ", cột số " + newCol);
+        $("#questionNumber").text("Câu hỏi " + newCol*10 + " điểm");
         $("#questionContent").text("");
         $("#questionAnswer").text("");
         // update background color
@@ -631,6 +639,20 @@
                 ngoiSaoHiVongDialog.dialog('close');
             }
         });
+    });
+
+
+    $("#chooseNSHV").click(function() {
+        var cur_label = $("#NSHVText").text();
+        if(cur_label.length > 0) {
+            // toggle
+            $("#NSHVText").text("");
+        }
+        else {
+            var bell_sound = new Audio("{% static 'chinhphuc/VeDichNSHV.mp3' %}");
+            bell_sound.play();
+            $("#NSHVText").text("ĐÃ CHỌN NGÔI SAO HY VỌNG");             
+        }
     });
 
 
