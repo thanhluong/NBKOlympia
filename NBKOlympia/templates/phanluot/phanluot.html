@@ -75,6 +75,15 @@
             </div>
         </div>
     </div>
+
+
+    <div id="gianhQuyenDialog" title="BẤM CHUÔNG">
+        <center>
+            <p id="gianhQuyenContent">Noi dung thong bao</p>
+            <button class="btn btn-success" id="resetGQBtn">OK</button>
+        </center>
+    </div>
+
     {% csrf_token %}
 
 {% endblock %}
@@ -93,6 +102,8 @@
             }
         }
     });
+
+    var demgio = new Audio("{% static 'chinhphuc/VeDich_20s.mp3' %}");
 
     function updateRound(roundName){
         $.ajax({
@@ -123,18 +134,78 @@
         });
     }
 
-    
-    // Send signal to handleAcceptingAnswer
-    function signalHandleAcceptingAnswer() {
+    function sendSignalGQ(isBegin){
+        var destURL = "{% url 'stopAcceptingGQ' %}";
+        if(isBegin)
+            destURL = "{% url 'beginAcceptingGQ' %}";
         $.ajax({
-            url: "{% url 'handleAcceptingAnswer' %}",
-            method: "GET",
+            url: destURL,
+            method: "POST",
             traditional: true,
-            success: function (data) {
-                // Do nothing
+            success: function(data){
+                // do nothing
+            }
+        });        
+    }
+
+    function sendSignalResetGQ(){
+        $.ajax({
+            url: "{% url 'resetGQState' %}",
+            method: "POST",
+            traditional: true,
+            success: function(data){
+                // do nothing
+            }
+        });
+    }
+
+    gianhQuyenDialog = $("#gianhQuyenDialog");
+
+    gianhQuyenDialog.dialog({
+        modal: true,
+        autoOpen: false
+    });
+
+    $("#resetGQBtn").click(function(){
+        sendSignalGQ(false);
+        sendSignalResetGQ();
+        gianhQuyenDialog.dialog('close');
+    });
+
+    // Function to wait for the GianhQuyen
+    setInterval(function() {
+        $.ajax({
+            url: "{% url 'gianhQuyen' %}",
+            method: "GET",
+            success: function(data) {
+                data = JSON.parse(data);
+                var gianhQuyenUser = data.gianhQuyenUser;
+                var acceptingGQ = data.acceptingGQ;
+                console.log("&&&", gianhQuyenUser);
+                if(!acceptingGQ) return 0;
+                // no one ringed the bell
+                if(gianhQuyenUser.length == 0){ 
+                    return null;
+                }
+                // stop countdown audio
+                demgio.pause();
+                // check the ringingDialog
+                if(gianhQuyenDialog.dialog("isOpen")){
+                    // already open
+                }
+                else{
+                    // the dialog has not been opened yet
+
+                    // make a sound
+                    var bell_sound = new Audio("{% static 'chinhphuc/ChinhPhuc_BamChuong.mp3' %}");
+                    bell_sound.play();
+                    $("#gianhQuyenContent").text(gianhQuyenUser + " đã nhấn chuông giành quyền trả lời!");
+                    gianhQuyenDialog.dialog("open");
+                }
             }
         })
-    }
+    }, 250);
+
 
     let countDownBox = $("#countDown");
 
@@ -142,10 +213,12 @@
         // Disable the button to avoid second click
         countDownBox.attr("disabled", "disabled");
 
-        // Signal the server to accept answers
-        signalHandleAcceptingAnswer();
+        // // Signal the server to accept answers
+        // signalHandleAcceptingAnswer();
+
+        // Start accepting gianhQuyen
+        sendSignalGQ(true);
         
-        var demgio = new Audio("{% static 'chinhphuc/VeDich_20s.mp3' %}");
         demgio.play();
 
         // Countdown 20s
@@ -156,25 +229,28 @@
                 countDownBox.text(newTime);
             } else {
                 // Send the request to server to stop received data
-                signalHandleAcceptingAnswer();
+                // signalHandleAcceptingAnswer();
 
                 // Make request to get the final answer
-                $.ajax({
-                    url: "{% url 'getDapAnThiSinh' %}",
-                    success: function (data) {
-                        data = JSON.parse(data);
-                        $("#dapAnThiSinh").html("");
-                        // Loop over data and update to the view
-                        for (let i = 0; i < data.length; i++) {
-                            const answer = data[i];
-                            var newAnswer = document.createElement("div");
-                            newAnswer.setAttribute("class", "answer col");
-                            newAnswer.innerHTML = "<span style='font-weight: bold'> " + answer.thisinh + "</span>" + ": " + answer.answer
-                            $("#dapAnThiSinh").append(newAnswer);
-                        }
+                // $.ajax({
+                //     url: "{% url 'getDapAnThiSinh' %}",
+                //     success: function (data) {
+                //         data = JSON.parse(data);
+                //         $("#dapAnThiSinh").html("");
+                //         // Loop over data and update to the view
+                //         for (let i = 0; i < data.length; i++) {
+                //             const answer = data[i];
+                //             var newAnswer = document.createElement("div");
+                //             newAnswer.setAttribute("class", "answer col");
+                //             newAnswer.innerHTML = "<span style='font-weight: bold'> " + answer.thisinh + "</span>" + ": " + answer.answer
+                //             $("#dapAnThiSinh").append(newAnswer);
+                //         }
 
-                    }
-                })
+                //     }
+                // });
+
+                // Stop accepting gianhQuyen
+                sendSignalGQ(false);
 
                 clearInterval(countDownInterval);
                 countDownBox.text("20");

@@ -88,6 +88,12 @@
                                 Ngôi sao hi vọng
                             </button>
                         {% endif %}
+
+                        {% if currentRound == "phanluot" %}
+                            <button id="gianhQuyen" class="btn btn-success" disabled="true">
+                                Bấm chuông trả lời
+                            </button>
+                        {% endif %}
                         
                     </center>
                     
@@ -305,6 +311,39 @@
         })
     }, 500);
 
+    {% endif %}
+
+    {% if currentRound == "phanluot" %}
+
+    let gianhQuyen = $("#gianhQuyen");
+
+    gianhQuyen.click(function(){
+        console.log("Đã giành quyền trả lời!");
+        // gianhQuyen.prop("disabled", true);
+        makeGianhQuyenCall();
+    });
+
+    setInterval(function() {
+        $.ajax({
+            url: "{% url 'gianhQuyen' %}",
+            method: "GET",
+            success: function(data) {
+                data = JSON.parse(data);
+                if(data.gianhQuyenUser.length == 0){
+                    if(gianhQuyen.prop("disabled")){
+                        gianhQuyen.prop("disabled", false);
+                    }
+                }
+                else{
+                    if(gianhQuyen.prop("disabled")){
+                    }
+                    else{
+                        gianhQuyen.prop("disabled", true)
+                    }
+                }
+            }
+        })
+    }, 250);
     {% endif %}
 
 </script>
