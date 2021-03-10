@@ -217,7 +217,7 @@
     }
 
     // Board size
-    const BOARD_SIZE = 6;
+    const BOARD_SIZE = 3;
 
     // Initialize questions 2D-array
     var questionAt = [];
@@ -239,6 +239,7 @@
 
     var currentQuestionID = 1;
     var questionAnswer = "";
+    var questionLevel;
 
     function randInt(low, high){
         randLow = Math.floor(Math.random() * 1000000) % (high-low+1);
@@ -300,7 +301,7 @@
 
         htmlContent = '';
 
-        for(i = 0; i <= BOARD_SIZE; i++){
+        for(i = 0; i <= 1; i++){
             htmlContent += '<tr>';
             if(i != 0) questionAt.push([]);
             for(j = 0; j <= BOARD_SIZE; j++){
@@ -367,6 +368,7 @@
         var countDownInterval = null;
         var totalTime = 15000;
         var remainingTime = totalTime;
+        console.log("#*#", questionLevel);
 
         countDownInterval =  setInterval(function () {
             remainingTime -= 50;
@@ -441,7 +443,7 @@
     }
 
     // randomizeQuestions();
-    createBangSo(14, 12, 10);
+    createBangSo(1, 1, 1);
     eventBinding();
 
     $('#colorselector').colorselector({
@@ -479,6 +481,7 @@
             questionContent = currentQuestion["questionText"];
             currentQuestionID = currentQuestion["questionID"];
             questionAnswer = currentQuestion["answer"];
+            questionLevel = currentQuestion["difficulty"];
 
             let questionFileType = currentQuestion["fileType"];
             let questionFile = currentQuestion["file"];

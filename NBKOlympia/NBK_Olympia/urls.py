@@ -32,7 +32,7 @@ urlpatterns = [
     # Handle the VuotSong app request
     path("vuotsong/", include("vuotsong.urls")),
     # Handle the TangToc app request
-    # path("tangtoc/", include("tangtoc.urls")),
+    path("tangtoc/", include("tangtoc.urls")),
     # Handle the ChinhPhuc app request
     path("chinhphuc/", include("chinhphuc.urls")),
     # Handle the PhanLuot app request
