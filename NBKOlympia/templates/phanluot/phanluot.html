@@ -64,7 +64,7 @@
     <div class="col-3" id="manageAnswer">
         <div class="row">
             <div class="col-12">
-                <button type="button" id="countDown" class="btn btn-danger" style="width:150px; height:150px; font-size: 70px">15</button>
+                <button type="button" id="countDown" class="btn btn-danger" style="width:150px; height:150px; font-size: 70px">20</button>
             </div>
         <!-- </div> -->
         <!-- <div class="row"> -->
@@ -145,10 +145,10 @@
         // Signal the server to accept answers
         signalHandleAcceptingAnswer();
         
-        var demgio = new Audio("{% static 'khoidong/ChinhPhuc_15s.mp3' %}");
+        var demgio = new Audio("{% static 'chinhphuc/VeDich_20s.mp3' %}");
         demgio.play();
 
-        // Countdown 10s
+        // Countdown 20s
         var countDownInterval = null;
         countDownInterval =  setInterval(function () {
             var newTime = parseInt(countDownBox.text()) - 1;
@@ -177,7 +177,7 @@
                 })
 
                 clearInterval(countDownInterval);
-                countDownBox.text("15");
+                countDownBox.text("20");
                 // Enable the box again for next question
                 countDownBox.removeAttr("disabled");
             }
