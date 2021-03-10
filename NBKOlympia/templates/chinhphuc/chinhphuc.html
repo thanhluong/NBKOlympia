@@ -257,6 +257,7 @@
         
         for(var i = 0; i < givenList.length; i++){
             idxList.push(i);
+            // valList.push(i);
             valList.push(randInt(1, 10000));
         }
 
@@ -317,20 +318,22 @@
                 }
 
                 htmlContent += '<td><div class="cellContent board' + i.toString() + j.toString() + '">';
-                let randVal = randInt(1, nEasy+nMedium+nHard);
+                // let randVal = randInt(1, nEasy+nMedium+nHard);
+                let randVal = 1;
                 if(randVal <= nEasy){
                     questionAt[i - 1].push("easy");
                     nEasy -= 1;
+                    htmlContent += '10';
                 }
                 else if (randVal <= nEasy + nMedium){
                     questionAt[i - 1].push("medium");
                     nMedium -= 1;
-                    htmlContent += '!';
+                    htmlContent += '20';
                 }
                 else{
                     questionAt[i - 1].push("hard");
                     nHard -= 1;
-                    htmlContent += '?';
+                    htmlContent += '30';
                 }
                 htmlContent += '</div></td>';
             }
@@ -355,21 +358,37 @@
             questions.push({questionID: 1, questionText: "What are you interested in that most people haven’t heard of?", answer: "salary", difficulty: "medium"});
         for(i = 0; i < 8; i++)
             questions.push({questionID: 1, questionText: "What could you give a 40-minute presentation on with absolutely no preparation?", answer: "liang", difficulty: "hard"});
-        questions = shuffle(questions);
+        // questions = shuffle(questions);
     }
 
     let traLoiCountDownProgressBar = $("#traLoiCountDownProgressBar");
 
     traLoiCountDownProgressBar.click(function(){
-        var demgio =  new Audio("{% static 'khoidong/ChinhPhuc_15s.mp3' %}");
-        demgio.play();
+        // var demgio =  new Audio("{% static 'khoidong/ChinhPhuc_15s.mp3' %}");
 
+        var demgio;
         // Countdown 15s
         var countDownInterval = null;
-        var totalTime = 15000;
-        var remainingTime = totalTime;
+        // var totalTime = 15000;
+        var totalTime;
         console.log("#*#", questionLevel);
 
+        if (questionLevel == 'easy') {
+            totalTime = 10000;
+            demgio = new Audio("{% static 'chinhphuc/VeDich_10s.mp3' %}");
+        }
+        else if (questionLevel == 'medium') {
+            totalTime = 15000;
+            demgio = new Audio("{% static 'khoidong/ChinhPhuc_15s.mp3' %}");
+        }
+        else {
+            totalTime = 20000;
+            demgio = new Audio("{% static 'chinhphuc/VeDich_20s.mp3' %}");
+        }
+
+        var remainingTime = totalTime;
+
+        demgio.play();
         countDownInterval =  setInterval(function () {
             remainingTime -= 50;
             if (remainingTime >= 0) {
