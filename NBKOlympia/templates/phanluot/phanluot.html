@@ -47,7 +47,7 @@
     <div class="col-9" id="question">
         <div class="row">
             <div class="col-12">
-                <p class="questionNumber"><span id="questionNumber">0</span><span>/1</span></p>
+                <p class="questionNumber"><span id="questionNumber">0</span><span>/3</span></p>
                 <button class="btn btn-outline-info" id="showAnswer">Hiện đáp án</button>
                 <button class="btn btn-outline-primary" id="nextQuestion">Câu hỏi tiếp theo</button>
             </div>
@@ -192,10 +192,10 @@
 
     $("#nextQuestion").click(function(event) {
         $("#questionAnswer").text("");
-        if (currentQuestionID >= 2) {
+        if (currentQuestionID >= questions.length) {
             $("#questionContent").text("Kết thúc phần thi");
         } else {
-            let currentQuestion = questions;
+            let currentQuestion = questions[currentQuestionID];
             
             // Get all the information of this question
             let questionContent = currentQuestion["questionText"];
